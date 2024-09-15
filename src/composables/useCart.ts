@@ -1,5 +1,6 @@
 import type { Cart, CartRecord } from "@/types/cart.types";
 import type { Product } from "@/types/products.types";
+import formatPrice from "@/utils/formatPrice";
 import { computed, ref } from "vue";
 
 const cart = ref<Cart>([]);
@@ -23,21 +24,32 @@ export default function useCart() {
   }
 
   function removeFromCart(idx: number) {
-    cart.value = cart.value.splice(idx, 1);
+    cart.value.splice(idx, 1);
   }
 
-  function calcRecordTotal(record: CartRecord) {
-    return record.item.price * record.quantity;
+  function calcRecordTotalPrice(record: CartRecord) {
+    return formatPrice(record.item.price * record.quantity);
   }
 
-  const cartTotal = computed(() =>
-    cart.value.reduce((total, record) => total + record.item.price * record.quantity, 0)
+  function isInCart(record: Product) {
+    return cart.value.some((r) => r.item.name === record.name);
+  }
+
+  const cartTotalPrice = computed(() =>
+    formatPrice(
+      cart.value.reduce((total, record) => total + record.item.price * record.quantity, 0)
+    )
   );
+
+  const cartLength = computed(() => cart.value.length);
 
   return {
     addToCart,
     removeFromCart,
-    calcRecordTotal,
-    cartTotal,
+    calcRecordTotalPrice,
+    isInCart,
+    cartTotalPrice,
+    cartLength,
+    cart,
   };
 }

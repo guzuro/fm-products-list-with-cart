@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Cart from "./components/Cart.vue";
 import ProductsList from "./components/ProductsList.vue";
 </script>
 
@@ -9,9 +10,7 @@ import ProductsList from "./components/ProductsList.vue";
         <ProductsList />
 
         <div>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, beatae delectus eius
-          repudiandae velit pariatur laborum autem ipsum harum corporis voluptate quam placeat
-          obcaecati commodi accusamus officiis. Nihil, sit incidunt!
+          <Cart />
         </div>
       </div>
     </div>

@@ -4,7 +4,10 @@
     <div class="products-list-item__header">
       <ProductImage :image="product.image" />
 
-      <AddToCartButton class="prodcts-list-item__cart-button" />
+      <AddToCartButton
+        class="prodcts-list-item__cart-button"
+        @click="emits('addToCart', product)"
+      />
     </div>
 
     <div class="products-list-item__category">
@@ -15,7 +18,7 @@
       {{ product.name }}
     </h2>
 
-    <div class="products-list-item__price">{{ formattedPrice }}</div>
+    <div class="products-list-item__price">{{ formatPrice(product.price) }}</div>
   </div>
 </template>
 
@@ -23,20 +26,16 @@
 import type { Product } from "@/types/products.types";
 import ProductImage from "./ProductImage.vue";
 import AddToCartButton from "./AddToCartButton.vue";
-import { computed } from "vue";
+import formatPrice from "@/utils/formatPrice";
+
+const emits = defineEmits<{
+  (e: "addToCart", product: Product): void;
+}>();
 
 const { product } = defineProps<{
   product: Product;
+  isInCart: boolean;
 }>();
-
-const formattedPrice = computed(() => {
-  return new Intl.NumberFormat("en-GB", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 2,
-    currencyDisplay: "narrowSymbol",
-  }).format(product.price);
-});
 </script>
 
 <style scoped>

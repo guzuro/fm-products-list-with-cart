@@ -1,5 +1,8 @@
 <template>
-  <a class="add-to-cart-button">
+  <a
+    class="add-to-cart-button"
+    @click.prevent="emits('click')"
+  >
     <IconAddToCart class="add-to-cart-button__icon" />
     <span> Add to Cart </span>
   </a>
@@ -7,6 +10,9 @@
 
 <script setup lang="ts">
 import IconAddToCart from "./icons/IconAddToCart.vue";
+import { defineEmits } from "vue";
+
+const emits = defineEmits(["click"]);
 </script>
 
 <style scoped>

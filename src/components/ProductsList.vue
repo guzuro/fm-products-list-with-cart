@@ -8,6 +8,8 @@
           v-for="(product, index) in products"
           :key="index"
           :product="product"
+          :is-in-cart="isInCart(product)"
+          @add-to-cart="addToCart"
         />
       </template>
       <template v-else> Loading.. </template>
@@ -20,8 +22,11 @@ import { onMounted, ref } from "vue";
 import ProductsListItem from "./ProductsListItem.vue";
 import type { Product } from "@/types/products.types";
 import { reqProducts } from "@/api/products.api";
+import useCart from "@/composables/useCart";
 
 const products = ref<Array<Product> | null>(null);
+
+const { addToCart, isInCart } = useCart();
 
 onMounted(() => {
   reqProducts()
