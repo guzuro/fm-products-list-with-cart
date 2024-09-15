@@ -1,16 +1,30 @@
 <template>
   <div class="products-list">
-    <ProductsListItem />
-    <ProductsListItem />
-    <ProductsListItem />
+    <ProductsListItem
+      v-for="(product, index) in products"
+      :key="index"
+      :product="product"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
+import { onMounted, ref } from "vue";
 import ProductsListItem from "./ProductsListItem.vue";
-import items from "../includes/data.json";
+import type { Product } from "@/types/products.types";
+import { reqProducts } from "@/api/products.api";
 
-console.log(items);
+const products = ref<Array<Product> | null>(null);
+
+onMounted(() => {
+  reqProducts()
+    .then((p) => (products.value = p))
+    .catch((err) => {
+      console.error(err);
+
+      products.value = [];
+    });
+});
 </script>
 
 <style scoped></style>
