@@ -41,6 +41,8 @@ const { cartLength, cart, cartTotalPrice, removeFromCart } = useCart();
 
 <style scoped>
 .cart {
+  position: sticky;
+  top: 0;
   background-color: white;
   border-radius: 10px;
   padding: 25px 30px;
@@ -85,9 +87,6 @@ const { cartLength, cart, cartTotalPrice, removeFromCart } = useCart();
   display: flex;
   align-content: center;
   justify-content: space-between;
-}
-
-.cart__total {
 }
 
 .cart__total-price {

@@ -8,8 +8,10 @@
           v-for="(product, index) in products"
           :key="index"
           :product="product"
-          :is-in-cart="isInCart(product)"
+          :product-quantity="cartProduct(product)?.quantity ?? 0"
+          :is-in-cart="!!cartProduct(product)"
           @add-to-cart="addToCart"
+          @decrement-from-cart="decrementFromCart"
         />
       </template>
       <template v-else> Loading.. </template>
@@ -26,7 +28,7 @@ import useCart from "@/composables/useCart";
 
 const products = ref<Array<Product> | null>(null);
 
-const { addToCart, isInCart } = useCart();
+const { addToCart, cartProduct, decrementFromCart } = useCart();
 
 onMounted(() => {
   reqProducts()

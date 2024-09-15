@@ -17,13 +17,14 @@ const emits = defineEmits(["click"]);
 
 <style scoped>
 .add-to-cart-button {
+  display: inline-block;
   user-select: none;
   color: var(--rose-900);
 
   background-color: var(--rose-50);
   font-weight: 600;
   white-space: nowrap;
-  padding: 12px 28px;
+  padding: 12px 25px;
 
   border: 1px var(--rose-300) solid;
   border-radius: 30px;

@@ -5,8 +5,16 @@
       <ProductImage :image="product.image" />
 
       <AddToCartButton
+        v-if="!isInCart"
         class="prodcts-list-item__cart-button"
         @click="emits('addToCart', product)"
+      />
+      <QuantityBlock
+        v-else
+        class="prodcts-list-item__cart-button"
+        :quantity="productQuantity"
+        @increment="emits('addToCart', product)"
+        @decrement="emits('decrementFromCart', product)"
       />
     </div>
 
@@ -26,20 +34,23 @@
 import type { Product } from "@/types/products.types";
 import ProductImage from "./ProductImage.vue";
 import AddToCartButton from "./AddToCartButton.vue";
+import QuantityBlock from "./QuantityBlock.vue";
 import formatPrice from "@/utils/formatPrice";
 
 const emits = defineEmits<{
   (e: "addToCart", product: Product): void;
+  (e: "decrementFromCart", product: Product): void;
 }>();
 
-const { product } = defineProps<{
+const { product, isInCart, productQuantity } = defineProps<{
   product: Product;
   isInCart: boolean;
+  productQuantity: number;
 }>();
 </script>
 
 <style scoped>
-:deep(.add-to-cart-button) {
+.prodcts-list-item__cart-button {
   position: absolute;
   left: 50%;
   bottom: 0;

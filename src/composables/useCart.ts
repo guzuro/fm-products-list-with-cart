@@ -27,12 +27,24 @@ export default function useCart() {
     cart.value.splice(idx, 1);
   }
 
+  function decrementFromCart(item: Product) {
+    const itemIdx = cart.value.findIndex((i) => i.item.name === item.name);
+
+    if (itemIdx !== -1) {
+      if (cart.value[itemIdx].quantity === 1) {
+        removeFromCart(itemIdx);
+      } else {
+        cart.value[itemIdx].quantity -= 1;
+      }
+    }
+  }
+
   function calcRecordTotalPrice(record: CartRecord) {
     return formatPrice(record.item.price * record.quantity);
   }
 
-  function isInCart(record: Product) {
-    return cart.value.some((r) => r.item.name === record.name);
+  function cartProduct(record: Product) {
+    return cart.value.find((r) => r.item.name === record.name);
   }
 
   const cartTotalPrice = computed(() =>
@@ -47,7 +59,8 @@ export default function useCart() {
     addToCart,
     removeFromCart,
     calcRecordTotalPrice,
-    isInCart,
+    cartProduct,
+    decrementFromCart,
     cartTotalPrice,
     cartLength,
     cart,

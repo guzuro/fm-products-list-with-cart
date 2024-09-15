@@ -13,12 +13,10 @@
         <span class="cart-item__total">{{ calcRecordTotalPrice(record) }}</span>
       </div>
     </div>
-    <a
-      class="cart-item__action"
-      @click.prevent="emits('removeFromCart', record)"
-    >
+
+    <IconButton @click="emits('removeFromCart', record)">
       <IconClose />
-    </a>
+    </IconButton>
   </div>
 </template>
 
@@ -28,6 +26,7 @@ import formatPrice from "@/utils/formatPrice";
 
 import useCart from "@/composables/useCart";
 import IconClose from "./icons/IconClose.vue";
+import IconButton from "./IconButton.vue";
 
 const { calcRecordTotalPrice } = useCart();
 
@@ -66,20 +65,5 @@ const { record } = defineProps<{
 
 .cart-item__total {
   font-weight: 600;
-}
-
-.cart-item__action {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  border: 1px var(--rose-300) solid;
-}
-
-.cart-item__action:hover {
-  cursor: pointer;
-  opacity: 0.75;
 }
 </style>
