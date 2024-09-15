@@ -1,7 +1,7 @@
 <template>
   <a class="add-to-cart-button">
-    <IconAddToCart class="icon" />
-    Add to Cart
+    <IconAddToCart class="add-to-cart-button__icon" />
+    <span> Add to Cart </span>
   </a>
 </template>
 
@@ -11,20 +11,24 @@ import IconAddToCart from "./icons/IconAddToCart.vue";
 
 <style scoped>
 .add-to-cart-button {
+  user-select: none;
   color: var(--rose-900);
 
   background-color: var(--rose-50);
   font-weight: 600;
-
-  display: inline-flex;
-  align-items: center;
+  white-space: nowrap;
   padding: 12px 28px;
 
   border: 1px var(--rose-300) solid;
   border-radius: 30px;
 }
 
-.icon {
-  vertical-align: middle;
+.add-to-cart-button:hover {
+  cursor: pointer;
+  background-color: var(--rose-100);
+}
+
+.add-to-cart-button__icon {
+  vertical-align: text-bottom;
 }
 </style>

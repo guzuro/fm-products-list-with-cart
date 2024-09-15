@@ -1,10 +1,17 @@
 <template>
   <div class="products-list">
-    <ProductsListItem
-      v-for="(product, index) in products"
-      :key="index"
-      :product="product"
-    />
+    <h1>Desserts</h1>
+
+    <div class="products-list__grid">
+      <template v-if="products">
+        <ProductsListItem
+          v-for="(product, index) in products"
+          :key="index"
+          :product="product"
+        />
+      </template>
+      <template v-else> Loading.. </template>
+    </div>
   </div>
 </template>
 
@@ -27,4 +34,21 @@ onMounted(() => {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.products-list__grid {
+  margin-top: 40px;
+
+  display: grid;
+  grid-column-gap: 16px;
+  grid-row-gap: 20px;
+  grid-template-columns: 1fr;
+
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media screen and (min-width: 968px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+</style>

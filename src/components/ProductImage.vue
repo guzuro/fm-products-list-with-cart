@@ -33,7 +33,8 @@ const imgSrc = computed(() => {
 
 <style scoped>
 .product-image {
-  width: 100%;
   border-radius: 10px;
+  width: 100%;
+  display: block;
 }
 </style>

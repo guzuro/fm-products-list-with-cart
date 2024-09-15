@@ -1,21 +1,21 @@
 `
 <template>
   <div class="products-list-item">
-    <div>
+    <div class="products-list-item__header">
       <ProductImage :image="product.image" />
 
       <AddToCartButton class="prodcts-list-item__cart-button" />
     </div>
 
-    <span>
+    <div class="products-list-item__category">
       {{ product.category }}
-    </span>
+    </div>
 
-    <h2>
+    <h2 class="products-list-item__name">
       {{ product.name }}
     </h2>
 
-    <span>{{ formattedPrice }}</span>
+    <div class="products-list-item__price">{{ formattedPrice }}</div>
   </div>
 </template>
 
@@ -40,14 +40,34 @@ const formattedPrice = computed(() => {
 </script>
 
 <style scoped>
-.products-list-item div {
+:deep(.add-to-cart-button) {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 50%);
+}
+
+.products-list-item {
+  width: 100%;
+}
+
+.products-list-item__header {
   position: relative;
 }
 
-:deep(.add-to-cart-button) {
-  position: absolute;
-  top: 85%;
-  left: 0;
-  transform: translateX(50%);
+.products-list-item__category {
+  margin-top: 40px;
+}
+.products-list-item__name,
+.products-list-item__price {
+  margin-top: 10px;
+}
+
+.products-list-item__name {
+  color: var(--rose-900);
+}
+
+.products-list-item__price {
+  color: var(--red);
 }
 </style>
