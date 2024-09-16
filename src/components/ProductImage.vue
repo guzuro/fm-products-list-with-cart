@@ -3,6 +3,8 @@
     class="product-image"
     alt=""
     :src="imgSrc"
+    :width="size"
+    :height="size"
     loading="lazy"
   />
 </template>
@@ -12,8 +14,9 @@ import type { Product } from "@/types/products.types";
 import useDevice from "@/composables/useBreakpoint";
 import { computed } from "vue";
 
-const { image } = defineProps<{
+const { image, size } = defineProps<{
   image: Product["image"];
+  size?: string;
 }>();
 
 const { breakpoint } = useDevice();
@@ -34,7 +37,7 @@ const imgSrc = computed(() => {
 <style scoped>
 .product-image {
   border-radius: 10px;
-  width: 100%;
+  max-width: 100%;
   display: block;
 }
 </style>

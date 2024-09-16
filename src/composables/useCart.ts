@@ -47,6 +47,10 @@ export default function useCart() {
     return cart.value.find((r) => r.item.name === record.name);
   }
 
+  function clearCart() {
+    return (cart.value = []);
+  }
+
   const cartTotalPrice = computed(() =>
     formatPrice(
       cart.value.reduce((total, record) => total + record.item.price * record.quantity, 0)
@@ -61,6 +65,7 @@ export default function useCart() {
     calcRecordTotalPrice,
     cartProduct,
     decrementFromCart,
+    clearCart,
     cartTotalPrice,
     cartLength,
     cart,

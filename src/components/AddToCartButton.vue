@@ -1,35 +1,18 @@
 <template>
-  <a
-    class="add-to-cart-button"
-    @click.prevent="emits('click')"
-  >
+  <Button @click="emits('click')">
     <IconAddToCart class="add-to-cart-button__icon" />
     <span> Add to Cart </span>
-  </a>
+  </Button>
 </template>
 
 <script setup lang="ts">
 import IconAddToCart from "./icons/IconAddToCart.vue";
-import { defineEmits } from "vue";
+import Button from "./Button.vue";
 
 const emits = defineEmits(["click"]);
 </script>
 
 <style scoped>
-.add-to-cart-button {
-  display: inline-block;
-  user-select: none;
-  color: var(--rose-900);
-
-  background-color: var(--rose-50);
-  font-weight: 600;
-  white-space: nowrap;
-  padding: 12px 25px;
-
-  border: 1px var(--rose-300) solid;
-  border-radius: 30px;
-}
-
 .add-to-cart-button:hover {
   cursor: pointer;
   background-color: var(--rose-100);

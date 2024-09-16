@@ -10,33 +10,64 @@
 
       <span> Your added items will appear here </span>
     </div>
-    <div
-      v-else
-      class="cart__items"
-    >
-      <CartItem
-        v-for="(record, index) in cart"
-        :key="index"
-        :record="record"
-        @remove-from-cart="removeFromCart(index)"
-      />
+    <div v-else>
+      <CartItems :readonly="false" />
 
-      <div class="cart__total-container">
-        <span> Order Total </span>
-        <span class="cart__total-price">
-          {{ cartTotalPrice }}
-        </span>
-      </div>
+      <Button
+        class="cart__confirm-button"
+        type="red"
+        block
+        @click="confirmOrder"
+      >
+        Confirm Order
+      </Button>
     </div>
+
+    <dialog id="orderConfirmModal">
+      <ResultOrder @finish-order="finishOrder" />
+    </dialog>
   </div>
 </template>
 
 <script setup lang="ts">
 import useCart from "@/composables/useCart";
 import IconEmptyCart from "./icons/IconEmptyCart.vue";
-import CartItem from "./CartItem.vue";
+import Button from "./Button.vue";
+import ResultOrder from "./ResultOrder.vue";
+import { onDeactivated, onMounted } from "vue";
+import CartItems from "./CartItems.vue";
 
-const { cartLength, cart, cartTotalPrice, removeFromCart } = useCart();
+const { cartLength, clearCart } = useCart();
+
+function confirmOrder() {
+  if ("orderConfirmModal" in window) {
+    (window.orderConfirmModal as HTMLDialogElement).showModal();
+  }
+}
+
+function finishOrder() {
+  clearCart();
+
+  if ("orderConfirmModal" in window) {
+    (window.orderConfirmModal as HTMLDialogElement).close();
+  }
+}
+
+function handleDialogClose(event: Event) {
+  clearCart();
+}
+
+onMounted(() => {
+  const dialog = document.querySelector(".orderConfirmModal");
+
+  if (dialog) {
+    dialog.addEventListener("close", handleDialogClose);
+  }
+});
+
+onDeactivated(() => {
+  removeEventListener("close", handleDialogClose);
+});
 </script>
 
 <style scoped>
@@ -77,21 +108,21 @@ const { cartLength, cart, cartTotalPrice, removeFromCart } = useCart();
   }
 }
 
-.cart__items {
-  margin-top: 35px;
-}
-
-.cart__total-container {
+.cart__confirm-button {
   margin-top: 20px;
-
-  display: flex;
-  align-content: center;
-  justify-content: space-between;
 }
 
-.cart__total-price {
-  font-size: 16px;
-  color: var(--rose-900);
-  font-weight: 700;
+.dialog {
+  left: 50%;
+  top: 20vh;
+  padding: 20px;
+  transform: translateX(-50%);
+  max-width: 590px;
+  width: 100%;
+  border-radius: 10px;
+
+  @media screen and (min-width: 768px) {
+    padding: 40px;
+  }
 }
 </style>
