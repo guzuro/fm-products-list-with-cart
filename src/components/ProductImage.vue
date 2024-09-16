@@ -23,13 +23,14 @@ const { breakpoint } = useDevice();
 
 const imgSrc = computed(() => {
   const bp = breakpoint.value;
+  const imagePath = "../assets/images/";
 
   if (bp.desktop) {
-    return new URL(image.desktop, import.meta.url).href;
+    return new URL(`${imagePath}${image.desktop}`, import.meta.url).href;
   } else if (bp.tablet) {
-    return new URL(image.tablet, import.meta.url).href;
+    return new URL(`${imagePath}${image.tablet}`, import.meta.url).href;
   } else {
-    return new URL(image.mobile, import.meta.url).href;
+    return new URL(`${imagePath}${image.mobile}`, import.meta.url).href;
   }
 });
 </script>
