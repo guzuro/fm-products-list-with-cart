@@ -1,45 +1,13 @@
-# fm-products-list-with-cart
+# Project overview
 
-This template should help get you started developing with Vue 3 in Vite.
+Challenge from FrontendMentor: **[Product list with cart](https://www.frontendmentor.io/challenges/product-list-with-cart-5MmqLVAp_d/hub)**
+Source task is placed in folder **_product-list-with-cart-main_**
 
-## Recommended IDE Setup
+## Technologies used:
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Vue 3;
+- TypeScript.
 
-## Type Support for `.vue` Imports in TS
+## Demo:
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-yarn
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-yarn dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-yarn build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-yarn test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-yarn lint
-```
+https://guzuro.github.io/fm-products-list-with-cart/
