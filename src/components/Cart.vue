@@ -23,7 +23,10 @@
       </Button>
     </div>
 
-    <dialog id="orderConfirmModal">
+    <dialog
+      class="order-modal"
+      id="orderConfirmModal"
+    >
       <ResultOrder @finish-order="finishOrder" />
     </dialog>
   </div>
@@ -112,7 +115,7 @@ onDeactivated(() => {
   margin-top: 20px;
 }
 
-.dialog {
+.order-modal {
   left: 50%;
   top: 20vh;
   padding: 20px;
